@@ -110,14 +110,31 @@ export default function SortGame() {
     }
   }
 
-  const touchStartRef = React.useRef(null)
+  const touchDraggingRef = React.useRef(null)
   const handleTouchStart = (e, id) => {
-    touchStartRef.current = { id, y: e.touches[0].clientY }
+    touchDraggingRef.current = id
     setDragging(id)
   }
-  const handleTouchEnd = (e, id) => {
-    if (touchStartRef.current && touchStartRef.current.id !== id) handleDrop(id)
-    touchStartRef.current = null
+  const handleTouchMove = (e) => {
+    e.preventDefault()
+    if (touchDraggingRef.current === null) return
+    const touch = e.touches[0]
+    const el = document.elementFromPoint(touch.clientX, touch.clientY)
+    const itemEl = el?.closest('[data-itemid]')
+    setOver(itemEl ? Number(itemEl.dataset.itemid) : null)
+  }
+  const handleTouchEnd = (e) => {
+    if (touchDraggingRef.current === null) return
+    const touch = e.changedTouches[0]
+    const el = document.elementFromPoint(touch.clientX, touch.clientY)
+    const itemEl = el?.closest('[data-itemid]')
+    if (itemEl) {
+      handleDrop(Number(itemEl.dataset.itemid))
+    } else {
+      setDragging(null)
+      setOver(null)
+    }
+    touchDraggingRef.current = null
   }
 
   const currentFamily = mode === 'colors' ? items[0]?.family : null
@@ -151,16 +168,20 @@ export default function SortGame() {
       </p>
 
       {/* Items */}
-      <div className="flex flex-wrap justify-center gap-3 min-h-[80px] py-2">
+      <div
+        className="flex flex-wrap justify-center gap-3 min-h-[80px] py-2"
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {items.map((item) => (
           <div
             key={item.id}
+            data-itemid={item.id}
             draggable
             onDragStart={() => handleDragStart(item.id)}
             onDragOver={(e) => handleDragOver(e, item.id)}
             onDrop={() => handleDrop(item.id)}
             onTouchStart={(e) => handleTouchStart(e, item.id)}
-            onTouchEnd={(e) => handleTouchEnd(e, item.id)}
             className="rounded-2xl flex items-center justify-center font-lato font-bold text-lg cursor-grab active:cursor-grabbing transition-all duration-200 select-none"
             style={{
               width:  mode === 'numbers' ? 60 : 48,
@@ -171,6 +192,7 @@ export default function SortGame() {
               transform: dragging === item.id ? 'scale(1.1) rotate(3deg)' : over === item.id ? 'scale(1.05)' : 'scale(1)',
               opacity: dragging === item.id ? 0.7 : 1,
               touchAction: 'none',
+              pointerEvents: dragging === item.id ? 'none' : 'auto',
             }}
           >
             {item.label}

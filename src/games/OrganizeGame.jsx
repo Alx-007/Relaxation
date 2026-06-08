@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 const CATEGORIES = [
   { id: 'naturaleza', label: 'Naturaleza', emoji: '🌿', bg: 'rgba(74,222,128,0.12)',   border: '#4ade80' },
@@ -89,6 +89,33 @@ export default function OrganizeGame() {
   const [placed, setPlaced]     = useState({})
   const [dragging, setDragging] = useState(null)
   const [hovered, setHovered]   = useState(null)
+  const touchDraggingRef = useRef(null)
+
+  const handleTouchStart = (e, item) => {
+    touchDraggingRef.current = item
+    setDragging(item)
+  }
+  const handleTouchMove = (e) => {
+    e.preventDefault()
+    if (!touchDraggingRef.current) return
+    const touch = e.touches[0]
+    const el = document.elementFromPoint(touch.clientX, touch.clientY)
+    const catEl = el?.closest('[data-catid]')
+    setHovered(catEl ? catEl.dataset.catid : null)
+  }
+  const handleTouchEnd = (e) => {
+    if (!touchDraggingRef.current) return
+    const touch = e.changedTouches[0]
+    const el = document.elementFromPoint(touch.clientX, touch.clientY)
+    const catEl = el?.closest('[data-catid]')
+    if (catEl) {
+      onDrop(catEl.dataset.catid)
+    } else {
+      setDragging(null)
+      setHovered(null)
+    }
+    touchDraggingRef.current = null
+  }
 
   const total = items.length
   const placedCount = Object.keys(placed).length
@@ -112,7 +139,7 @@ export default function OrganizeGame() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4" onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
       {/* Header */}
       <div className="flex items-center justify-between">
         <span className="text-sm font-semibold" style={{ color: '#5b21b6' }}>
@@ -170,9 +197,11 @@ export default function OrganizeGame() {
             ) : unplaced.map(item => (
               <div
                 key={item.id}
+                data-itemid={item.id}
                 draggable
                 onDragStart={() => setDragging(item)}
                 onDragEnd={() => { setDragging(null); setHovered(null) }}
+                onTouchStart={(e) => handleTouchStart(e, item)}
                 className="flex flex-col items-center gap-0.5 px-3 py-2 rounded-xl cursor-grab active:cursor-grabbing select-none transition-all duration-200"
                 style={{
                   background: 'rgba(243,232,255,0.9)',
@@ -180,6 +209,8 @@ export default function OrganizeGame() {
                   boxShadow: '0 2px 8px rgba(168,85,247,0.1)',
                   opacity: dragging?.id === item.id ? 0.4 : 1,
                   transform: dragging?.id === item.id ? 'scale(0.95)' : 'scale(1)',
+                  touchAction: 'none',
+                  pointerEvents: dragging?.id === item.id ? 'none' : 'auto',
                 }}
               >
                 <span className="text-2xl leading-none">{item.emoji}</span>
@@ -199,6 +230,7 @@ export default function OrganizeGame() {
               return (
                 <div
                   key={cat.id}
+                  data-catid={cat.id}
                   onDragOver={e => { e.preventDefault(); setHovered(cat.id) }}
                   onDragLeave={() => setHovered(null)}
                   onDrop={() => onDrop(cat.id)}
