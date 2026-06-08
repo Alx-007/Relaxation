@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 const CATEGORIES = [
   { id: 'naturaleza', label: 'Naturaleza', emoji: '🌿', bg: 'rgba(74,222,128,0.12)',   border: '#4ade80' },
@@ -89,33 +89,47 @@ export default function OrganizeGame() {
   const [placed, setPlaced]     = useState({})
   const [dragging, setDragging] = useState(null)
   const [hovered, setHovered]   = useState(null)
+  const containerRef = useRef(null)
   const touchDraggingRef = useRef(null)
 
   const handleTouchStart = (e, item) => {
     touchDraggingRef.current = item
     setDragging(item)
   }
-  const handleTouchMove = (e) => {
-    e.preventDefault()
-    if (!touchDraggingRef.current) return
-    const touch = e.touches[0]
-    const el = document.elementFromPoint(touch.clientX, touch.clientY)
-    const catEl = el?.closest('[data-catid]')
-    setHovered(catEl ? catEl.dataset.catid : null)
-  }
-  const handleTouchEnd = (e) => {
-    if (!touchDraggingRef.current) return
-    const touch = e.changedTouches[0]
-    const el = document.elementFromPoint(touch.clientX, touch.clientY)
-    const catEl = el?.closest('[data-catid]')
-    if (catEl) {
-      onDrop(catEl.dataset.catid)
-    } else {
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const onMove = (e) => {
+      if (!touchDraggingRef.current) return
+      e.preventDefault()
+      const t = e.touches[0]
+      const found = document.elementFromPoint(t.clientX, t.clientY)
+      const catEl = found?.closest('[data-catid]')
+      setHovered(catEl ? catEl.dataset.catid : null)
+    }
+    const onEnd = (e) => {
+      const item = touchDraggingRef.current
+      if (!item) return
+      touchDraggingRef.current = null
+      const t = e.changedTouches[0]
+      const found = document.elementFromPoint(t.clientX, t.clientY)
+      const catEl = found?.closest('[data-catid]')
+      if (catEl && item.category === catEl.dataset.catid) {
+        setPlaced(p => ({ ...p, [item.id]: catEl.dataset.catid }))
+      }
       setDragging(null)
       setHovered(null)
     }
-    touchDraggingRef.current = null
-  }
+    el.addEventListener('touchmove', onMove, { passive: false })
+    el.addEventListener('touchend', onEnd)
+    el.addEventListener('touchcancel', onEnd)
+    return () => {
+      el.removeEventListener('touchmove', onMove)
+      el.removeEventListener('touchend', onEnd)
+      el.removeEventListener('touchcancel', onEnd)
+    }
+  }, [])
 
   const total = items.length
   const placedCount = Object.keys(placed).length
@@ -139,7 +153,7 @@ export default function OrganizeGame() {
   }
 
   return (
-    <div className="flex flex-col gap-4" onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+    <div ref={containerRef} className="flex flex-col gap-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <span className="text-sm font-semibold" style={{ color: '#5b21b6' }}>

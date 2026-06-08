@@ -110,32 +110,65 @@ export default function SortGame() {
     }
   }
 
+  const containerRef = React.useRef(null)
   const touchDraggingRef = React.useRef(null)
+  const stateRef = React.useRef({ items, mode })
+  useEffect(() => { stateRef.current = { items, mode } })
+
   const handleTouchStart = (e, id) => {
     touchDraggingRef.current = id
     setDragging(id)
   }
-  const handleTouchMove = (e) => {
-    e.preventDefault()
-    if (touchDraggingRef.current === null) return
-    const touch = e.touches[0]
-    const el = document.elementFromPoint(touch.clientX, touch.clientY)
-    const itemEl = el?.closest('[data-itemid]')
-    setOver(itemEl ? Number(itemEl.dataset.itemid) : null)
-  }
-  const handleTouchEnd = (e) => {
-    if (touchDraggingRef.current === null) return
-    const touch = e.changedTouches[0]
-    const el = document.elementFromPoint(touch.clientX, touch.clientY)
-    const itemEl = el?.closest('[data-itemid]')
-    if (itemEl) {
-      handleDrop(Number(itemEl.dataset.itemid))
-    } else {
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const onMove = (e) => {
+      if (touchDraggingRef.current === null) return
+      e.preventDefault()
+      const t = e.touches[0]
+      const found = document.elementFromPoint(t.clientX, t.clientY)
+      const itemEl = found?.closest('[data-itemid]')
+      const id = itemEl ? Number(itemEl.dataset.itemid) : null
+      setOver(id !== touchDraggingRef.current ? id : null)
+    }
+    const onEnd = (e) => {
+      const dragId = touchDraggingRef.current
+      if (dragId === null) return
+      touchDraggingRef.current = null
+      const t = e.changedTouches[0]
+      const found = document.elementFromPoint(t.clientX, t.clientY)
+      const itemEl = found?.closest('[data-itemid]')
+      const targetId = itemEl ? Number(itemEl.dataset.itemid) : null
+      if (targetId !== null && targetId !== dragId) {
+        const { items: cur, mode: curMode } = stateRef.current
+        const next = [...cur]
+        const from = next.findIndex(it => it.id === dragId)
+        const to   = next.findIndex(it => it.id === targetId)
+        const [removed] = next.splice(from, 1)
+        next.splice(to, 0, removed)
+        setItems(next)
+        setAttempts(a => a + 1)
+        if (isSorted(next, curMode)) {
+          playSuccessSound()
+          setWon(true)
+          setCelebration(true)
+          setMessage(MOTIVATIONAL[Math.floor(Math.random() * MOTIVATIONAL.length)])
+          setTimeout(() => setCelebration(false), 2000)
+        }
+      }
       setDragging(null)
       setOver(null)
     }
-    touchDraggingRef.current = null
-  }
+    el.addEventListener('touchmove', onMove, { passive: false })
+    el.addEventListener('touchend', onEnd)
+    el.addEventListener('touchcancel', onEnd)
+    return () => {
+      el.removeEventListener('touchmove', onMove)
+      el.removeEventListener('touchend', onEnd)
+      el.removeEventListener('touchcancel', onEnd)
+    }
+  }, [])
 
   const currentFamily = mode === 'colors' ? items[0]?.family : null
 
@@ -169,9 +202,8 @@ export default function SortGame() {
 
       {/* Items */}
       <div
+        ref={containerRef}
         className="flex flex-wrap justify-center gap-3 min-h-[80px] py-2"
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
       >
         {items.map((item) => (
           <div
