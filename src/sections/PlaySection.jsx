@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import BubblePop from '../games/BubblePop'
 import BreathingExercise from '../games/BreathingExercise'
 import SortGame from '../games/SortGame'
-import ColorPalette from '../games/ColorPalette'
 import DrawingCanvas from '../games/DrawingCanvas'
 import OrganizeGame from '../games/OrganizeGame'
 
@@ -30,14 +29,6 @@ const GAMES = [
     desc: 'Arrastra números o colores y ponlos en orden',
     component: SortGame,
     color: '#e879f9',
-  },
-  {
-    id: 'colors',
-    emoji: '🎨',
-    title: 'Paleta de colores',
-    desc: 'Mezcla y guarda tus colores favoritos',
-    component: ColorPalette,
-    color: '#7c3aed',
   },
   {
     id: 'drawing',

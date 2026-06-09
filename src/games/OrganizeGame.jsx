@@ -224,7 +224,6 @@ export default function OrganizeGame() {
                   opacity: dragging?.id === item.id ? 0.4 : 1,
                   transform: dragging?.id === item.id ? 'scale(0.95)' : 'scale(1)',
                   touchAction: 'none',
-                  pointerEvents: dragging?.id === item.id ? 'none' : 'auto',
                 }}
               >
                 <span className="text-2xl leading-none">{item.emoji}</span>

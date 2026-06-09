@@ -224,7 +224,6 @@ export default function SortGame() {
               transform: dragging === item.id ? 'scale(1.1) rotate(3deg)' : over === item.id ? 'scale(1.05)' : 'scale(1)',
               opacity: dragging === item.id ? 0.7 : 1,
               touchAction: 'none',
-              pointerEvents: dragging === item.id ? 'none' : 'auto',
             }}
           >
             {item.label}
