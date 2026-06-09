@@ -165,7 +165,7 @@ export default function BubblePop() {
   return (
     <div className="flex flex-col items-center gap-3">
       <div
-        className="flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-lato font-semibold"
+        className="flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-songwriter font-semibold"
         style={{ background: 'rgba(168,85,247,0.15)', color: '#7c3aed' }}
       >
         🫧 Burbujas reventadas: <span className="text-lg font-bold">{count}</span>
@@ -175,7 +175,7 @@ export default function BubblePop() {
         className="w-full rounded-2xl cursor-pointer"
         style={{ height: 360, touchAction: 'none', background: 'rgba(255,255,255,0.15)' }}
       />
-      <p className="text-xs font-lato opacity-60" style={{ color: '#7c3aed' }}>
+      <p className="text-xs font-songwriter opacity-60" style={{ color: '#7c3aed' }}>
         ¡Toca las burbujas para reventarlas!
       </p>
     </div>

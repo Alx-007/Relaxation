@@ -29,10 +29,10 @@ export default function Navbar({ activeSection, setActiveSection }) {
           {/* Logo */}
           <button
             onClick={() => handleNav('home')}
-            className="font-playfair text-xl md:text-2xl font-bold italic transition-opacity hover:opacity-80"
+            className="font-muthiara text-2xl md:text-3xl transition-opacity hover:opacity-80"
             style={{ color: '#7c3aed' }}
           >
-            spaceYours
+            SpaceYours
             <span className="ml-1 text-base">🌸</span>
           </button>
 
@@ -42,7 +42,7 @@ export default function Navbar({ activeSection, setActiveSection }) {
               <button
                 key={item.id}
                 onClick={() => handleNav(item.id)}
-                className={`px-4 py-2 rounded-xl font-lato font-medium text-sm transition-all duration-200 ${
+                className={`px-4 py-2 rounded-xl font-songwriter font-medium text-sm transition-all duration-200 ${
                   activeSection === item.id
                     ? 'text-white shadow-md'
                     : 'text-plum-800 hover:bg-white/50'
@@ -105,7 +105,7 @@ export default function Navbar({ activeSection, setActiveSection }) {
             <button
               key={item.id}
               onClick={() => handleNav(item.id)}
-              className={`w-full px-4 py-3 rounded-2xl font-lato font-medium text-base text-left transition-all duration-200 ${
+              className={`w-full px-4 py-3 rounded-2xl font-songwriter font-medium text-base text-left transition-all duration-200 ${
                 activeSection === item.id ? 'text-white shadow-md' : ''
               }`}
               style={

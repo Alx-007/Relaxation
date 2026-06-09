@@ -67,7 +67,7 @@ function Modal({ game, onClose }) {
         >
           <div className="flex items-center gap-3">
             <span className="text-2xl">{game.emoji}</span>
-            <h3 className="font-playfair text-xl font-semibold" style={{ color: '#3b0764' }}>
+            <h3 className="font-muthiara text-xl font-semibold" style={{ color: '#3b0764' }}>
               {game.title}
             </h3>
           </div>
@@ -97,10 +97,10 @@ export default function PlaySection() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10 animate-fade-in-up">
-          <h2 className="font-playfair text-4xl sm:text-5xl font-bold mb-3" style={{ color: '#3b0764' }}>
+          <h2 className="font-muthiara text-4xl sm:text-5xl font-bold mb-3" style={{ color: '#3b0764' }}>
             Jugar y respirar 🫧
           </h2>
-          <p className="font-lato text-lg opacity-70 max-w-md mx-auto" style={{ color: '#5b21b6' }}>
+          <p className="font-songwriter text-lg opacity-70 max-w-md mx-auto" style={{ color: '#5b21b6' }}>
             Mini-juegos y ejercicios para relajar la mente antes del examen
           </p>
         </div>
@@ -123,14 +123,14 @@ export default function PlaySection() {
               >
                 {game.emoji}
               </div>
-              <h3 className="font-playfair text-lg font-semibold mb-1" style={{ color: '#3b0764' }}>
+              <h3 className="font-muthiara text-lg font-semibold mb-1" style={{ color: '#3b0764' }}>
                 {game.title}
               </h3>
-              <p className="font-lato text-sm opacity-65" style={{ color: '#5b21b6' }}>
+              <p className="font-songwriter text-sm opacity-65" style={{ color: '#5b21b6' }}>
                 {game.desc}
               </p>
               <div
-                className="mt-4 flex items-center gap-1 text-xs font-lato font-semibold"
+                className="mt-4 flex items-center gap-1 text-xs font-songwriter font-semibold"
                 style={{ color: game.color }}
               >
                 Jugar ahora

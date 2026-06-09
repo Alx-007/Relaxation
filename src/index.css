@@ -4,14 +4,14 @@
 
 @layer base {
   body {
-    font-family: 'Lato', 'Nunito', sans-serif;
+    font-family: 'Please Write Me a Song', 'Lato', 'Nunito', sans-serif;
     background-color: #f3e8ff;
     color: #3b0764;
     overflow-x: hidden;
   }
 
   h1, h2, h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Muthiara', 'Playfair Display', Georgia, serif;
   }
 
   ::-webkit-scrollbar {

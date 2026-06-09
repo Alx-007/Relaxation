@@ -180,7 +180,7 @@ export default function SortGame() {
           <button
             key={m}
             onClick={() => setMode(m)}
-            className="px-3 py-1.5 rounded-xl text-sm font-lato font-medium transition-all"
+            className="px-3 py-1.5 rounded-xl text-sm font-songwriter font-medium transition-all"
             style={
               mode === m
                 ? { background: 'linear-gradient(135deg,#a855f7,#e879f9)', color: '#fff' }
@@ -193,7 +193,7 @@ export default function SortGame() {
       </div>
 
       {/* Hint */}
-      <p className="text-xs font-lato opacity-60 text-center" style={{ color: '#7c3aed' }}>
+      <p className="text-xs font-songwriter opacity-60 text-center" style={{ color: '#7c3aed' }}>
         {mode === 'numbers'
           ? <>Arrastra para ordenar de <strong>mayor a menor</strong></>
           : <>Ordena los <strong>{currentFamily}</strong> del más oscuro al más claro</>
@@ -214,7 +214,7 @@ export default function SortGame() {
             onDragOver={(e) => handleDragOver(e, item.id)}
             onDrop={() => handleDrop(item.id)}
             onTouchStart={(e) => handleTouchStart(e, item.id)}
-            className="rounded-2xl flex items-center justify-center font-lato font-bold text-lg cursor-grab active:cursor-grabbing transition-all duration-200 select-none"
+            className="rounded-2xl flex items-center justify-center font-songwriter font-bold text-lg cursor-grab active:cursor-grabbing transition-all duration-200 select-none"
             style={{
               width:  mode === 'numbers' ? 60 : 48,
               height: mode === 'numbers' ? 60 : 48,
@@ -233,7 +233,7 @@ export default function SortGame() {
 
       {won && (
         <div
-          className="text-center px-6 py-3 rounded-2xl font-lato font-semibold animate-fade-in-up"
+          className="text-center px-6 py-3 rounded-2xl font-songwriter font-semibold animate-fade-in-up"
           style={{ background: 'rgba(168,85,247,0.15)', color: '#7c3aed' }}
         >
           {message}
@@ -246,7 +246,7 @@ export default function SortGame() {
         {won && (
           <button
             onClick={reset}
-            className="px-5 py-2 rounded-xl font-lato font-semibold text-sm text-white transition-all hover:scale-105"
+            className="px-5 py-2 rounded-xl font-songwriter font-semibold text-sm text-white transition-all hover:scale-105"
             style={{ background: 'linear-gradient(135deg,#a855f7,#e879f9)' }}
           >
             🔄 Nuevo juego
@@ -254,7 +254,7 @@ export default function SortGame() {
         )}
         <button
           onClick={reset}
-          className="px-5 py-2 rounded-xl font-lato font-medium text-sm transition-all hover:bg-white/50"
+          className="px-5 py-2 rounded-xl font-songwriter font-medium text-sm transition-all hover:bg-white/50"
           style={{ background: 'rgba(255,255,255,0.4)', color: '#7c3aed' }}
         >
           Reiniciar
@@ -262,7 +262,7 @@ export default function SortGame() {
       </div>
 
       {!won && (
-        <p className="text-xs font-lato opacity-50" style={{ color: '#7c3aed' }}>
+        <p className="text-xs font-songwriter opacity-50" style={{ color: '#7c3aed' }}>
           Intentos: {attempts}
         </p>
       )}

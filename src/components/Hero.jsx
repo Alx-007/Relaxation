@@ -37,7 +37,7 @@ export default function Hero({ setActiveSection }) {
       <div className="relative z-10 max-w-3xl mx-auto animate-fade-in-up">
         {/* Subtitle chip */}
         <div
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-lato mb-6 glass"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-songwriter mb-6 glass"
           style={{ color: '#7c3aed' }}
         >
           <span className="animate-pulse-soft">🌸</span>
@@ -46,7 +46,7 @@ export default function Hero({ setActiveSection }) {
 
         {/* Main headline */}
         <h1
-          className="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+          className="font-muthiara text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
           style={{ color: '#3b0764' }}
         >
           Todos los días,
@@ -66,7 +66,7 @@ export default function Hero({ setActiveSection }) {
 
         {/* Subtitle */}
         <p
-          className="font-lato text-lg sm:text-xl md:text-2xl mb-10 leading-relaxed max-w-xl mx-auto"
+          className="font-songwriter text-lg sm:text-xl md:text-2xl mb-10 leading-relaxed max-w-xl mx-auto"
           style={{ color: '#5b21b6', opacity: 0.85 }}
         >
           Este es tu espacio. Respira. Juega. Escribe.{' '}
@@ -89,15 +89,15 @@ export default function Hero({ setActiveSection }) {
               <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-200">
                 {item.emoji}
               </div>
-              <div className="font-playfair font-semibold text-base mb-1">{item.title}</div>
-              <div className="font-lato text-xs opacity-70">{item.desc}</div>
+              <div className="font-muthiara font-semibold text-base mb-1">{item.title}</div>
+              <div className="font-songwriter text-xs opacity-70">{item.desc}</div>
             </button>
           ))}
         </div>
 
         {/* Scroll hint */}
         <div className="mt-12 flex flex-col items-center gap-2 opacity-50 animate-float" style={{ animationDelay: '2s' }}>
-          <span className="font-lato text-xs" style={{ color: '#7c3aed' }}>Elige una sección para empezar</span>
+          <span className="font-songwriter text-xs" style={{ color: '#7c3aed' }}>Elige una sección para empezar</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="2">
             <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>

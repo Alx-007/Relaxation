@@ -15,6 +15,11 @@ const FONT_SIZES = [
   { label: 'Grande', value: '20px' },
 ]
 
+const DIARY_FONTS = [
+  { label: 'Muthiara', value: '"Muthiara", "Playfair Display", cursive' },
+  { label: 'Please Write Me a Song', value: '"Please Write Me a Song", Lato, sans-serif' },
+]
+
 const TEXT_COLORS = ['#3b0764', '#a855f7', '#1e40af', '#166534', '#b91c1c', '#92400e', '#1f2937']
 
 function loadNotes() {
@@ -35,6 +40,7 @@ export default function DiarySection() {
   const [phrase] = useState(getRandomPhrase)
   const [bgId, setBgId] = useState('plain')
   const [fontSize, setFontSize] = useState('16px')
+  const [fontFamily, setFontFamily] = useState(DIARY_FONTS[0].value)
   const [textColor, setTextColor] = useState('#3b0764')
   const [showPanel, setShowPanel] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState(null)
@@ -125,11 +131,11 @@ export default function DiarySection() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 animate-fade-in-up">
-          <h2 className="font-playfair text-4xl sm:text-5xl font-bold mb-3" style={{ color: '#3b0764' }}>
+          <h2 className="font-muthiara text-4xl sm:text-5xl font-bold mb-3" style={{ color: '#3b0764' }}>
             Mi diario 📓
           </h2>
           <p
-            className="font-lato text-sm italic px-4 py-2 rounded-xl inline-block glass"
+            className="font-songwriter text-sm italic px-4 py-2 rounded-xl inline-block glass"
             style={{ color: '#7c3aed' }}
           >
             "{phrase}"
@@ -150,7 +156,7 @@ export default function DiarySection() {
               style={{ width: 220, height: showPanel ? '80vh' : '100%', minHeight: 0 }}
             >
               <div className="flex items-center justify-between p-4 pb-2">
-                <span className="font-playfair font-semibold text-sm" style={{ color: '#3b0764' }}>
+                <span className="font-muthiara font-semibold text-sm" style={{ color: '#3b0764' }}>
                   Notas ({notes.length})
                 </span>
                 <button
@@ -166,14 +172,14 @@ export default function DiarySection() {
                 {notes.length === 0 ? (
                   <div className="text-center py-8 opacity-50">
                     <div className="text-3xl mb-2">📝</div>
-                    <p className="text-xs font-lato" style={{ color: '#7c3aed' }}>Sin notas aún</p>
+                    <p className="text-xs font-songwriter" style={{ color: '#7c3aed' }}>Sin notas aún</p>
                   </div>
                 ) : (
                   notes.map((note) => (
                     <div key={note.id} className="relative group">
                       <button
                         onClick={() => selectNote(note.id)}
-                        className={`w-full text-left px-3 py-2.5 rounded-xl mb-1 transition-all text-xs font-lato ${
+                        className={`w-full text-left px-3 py-2.5 rounded-xl mb-1 transition-all text-xs font-songwriter ${
                           activeId === note.id ? 'text-white' : ''
                         }`}
                         style={
@@ -216,7 +222,7 @@ export default function DiarySection() {
               {/* Mobile: notes toggle */}
               <button
                 onClick={() => setShowPanel(true)}
-                className="md:hidden px-2.5 py-1 rounded-lg text-xs font-lato"
+                className="md:hidden px-2.5 py-1 rounded-lg text-xs font-songwriter"
                 style={{ background: 'rgba(168,85,247,0.15)', color: '#7c3aed' }}
               >
                 📋 Notas
@@ -243,11 +249,23 @@ export default function DiarySection() {
 
               <div className="w-px h-5 bg-purple-200" />
 
+              {/* Font family */}
+              <select
+                value={fontFamily}
+                onChange={(e) => setFontFamily(e.target.value)}
+                className="rounded-lg px-2 py-1 text-xs border-0 outline-none"
+                style={{ background: 'rgba(255,255,255,0.5)', color: '#7c3aed', fontFamily: fontFamily }}
+              >
+                {DIARY_FONTS.map((f) => (
+                  <option key={f.value} value={f.value} style={{ fontFamily: f.value }}>{f.label}</option>
+                ))}
+              </select>
+
               {/* Font size */}
               <select
                 value={fontSize}
                 onChange={(e) => { setFontSize(e.target.value); execFormat('fontSize', e.target.value === '14px' ? '1' : e.target.value === '16px' ? '3' : '5') }}
-                className="rounded-lg px-2 py-1 text-xs font-lato border-0 outline-none"
+                className="rounded-lg px-2 py-1 text-xs font-songwriter border-0 outline-none"
                 style={{ background: 'rgba(255,255,255,0.5)', color: '#7c3aed' }}
               >
                 {FONT_SIZES.map((f) => <option key={f.value} value={f.value}>{f.label}</option>)}
@@ -272,14 +290,14 @@ export default function DiarySection() {
               <select
                 value={bgId}
                 onChange={(e) => setBgId(e.target.value)}
-                className="rounded-lg px-2 py-1 text-xs font-lato border-0 outline-none"
+                className="rounded-lg px-2 py-1 text-xs font-songwriter border-0 outline-none"
                 style={{ background: 'rgba(255,255,255,0.5)', color: '#7c3aed' }}
               >
                 {BACKGROUNDS.map((b) => <option key={b.id} value={b.id}>{b.label}</option>)}
               </select>
 
               {/* Save indicator */}
-              <div className={`ml-auto flex items-center gap-1 text-xs font-lato transition-opacity duration-500 ${saved ? 'opacity-100' : 'opacity-0'}`} style={{ color: '#a855f7' }}>
+              <div className={`ml-auto flex items-center gap-1 text-xs font-songwriter transition-opacity duration-500 ${saved ? 'opacity-100' : 'opacity-0'}`} style={{ color: '#a855f7' }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
@@ -294,7 +312,7 @@ export default function DiarySection() {
                   value={title}
                   onChange={handleTitleChange}
                   placeholder="Título de la nota..."
-                  className="px-5 pt-4 pb-2 text-lg font-playfair font-semibold bg-transparent outline-none border-b"
+                  className="px-5 pt-4 pb-2 text-lg font-muthiara font-semibold bg-transparent outline-none border-b"
                   style={{ color: '#3b0764', borderColor: 'rgba(192,132,252,0.15)' }}
                 />
                 {/* Content editable */}
@@ -303,10 +321,11 @@ export default function DiarySection() {
                   contentEditable
                   suppressContentEditableWarning
                   onInput={autoSave}
-                  className="flex-1 px-5 py-4 outline-none overflow-y-auto font-lato leading-relaxed"
+                  className="flex-1 px-5 py-4 outline-none overflow-y-auto font-songwriter leading-relaxed"
                   style={{
                     color: '#3b0764',
                     fontSize,
+                    fontFamily,
                     minHeight: 0,
                     ...bg.style,
                   }}
@@ -316,12 +335,12 @@ export default function DiarySection() {
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center gap-4">
                 <div className="text-5xl">📝</div>
-                <p className="font-playfair text-xl italic" style={{ color: '#7c3aed' }}>
+                <p className="font-muthiara text-xl italic" style={{ color: '#7c3aed' }}>
                   {notes.length === 0 ? 'Comienza tu primera nota' : 'Selecciona una nota'}
                 </p>
                 <button
                   onClick={createNote}
-                  className="px-6 py-2.5 rounded-2xl font-lato font-semibold text-white transition-all hover:scale-105 shadow-md"
+                  className="px-6 py-2.5 rounded-2xl font-songwriter font-semibold text-white transition-all hover:scale-105 shadow-md"
                   style={{ background: 'linear-gradient(135deg,#a855f7,#e879f9)' }}
                 >
                   + Nueva nota

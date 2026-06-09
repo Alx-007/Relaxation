@@ -29,6 +29,8 @@ export default {
         }
       },
       fontFamily: {
+        muthiara: ['"Muthiara"', '"Playfair Display"', 'cursive', 'serif'],
+        songwriter: ['"Please Write Me a Song"', 'Lato', 'sans-serif'],
         playfair: ['"Playfair Display"', 'Georgia', 'serif'],
         lato: ['Lato', 'Nunito', 'sans-serif'],
       },

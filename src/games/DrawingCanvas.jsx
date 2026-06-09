@@ -143,7 +143,7 @@ export default function DrawingCanvas() {
         {/* Eraser */}
         <button
           onClick={() => setEraser((e) => !e)}
-          className="px-3 py-1.5 rounded-xl text-xs font-lato font-medium transition-all"
+          className="px-3 py-1.5 rounded-xl text-xs font-songwriter font-medium transition-all"
           style={
             eraser
               ? { background: 'rgba(168,85,247,0.2)', color: '#7c3aed', border: '1.5px solid #a855f7' }
@@ -155,7 +155,7 @@ export default function DrawingCanvas() {
 
         <button
           onClick={clearCanvas}
-          className="px-3 py-1.5 rounded-xl text-xs font-lato font-medium transition-all hover:bg-red-50"
+          className="px-3 py-1.5 rounded-xl text-xs font-songwriter font-medium transition-all hover:bg-red-50"
           style={{ background: 'rgba(255,255,255,0.5)', color: '#ef4444' }}
         >
           🗑️ Limpiar
@@ -163,7 +163,7 @@ export default function DrawingCanvas() {
 
         <button
           onClick={downloadCanvas}
-          className="px-3 py-1.5 rounded-xl text-xs font-lato font-medium transition-all"
+          className="px-3 py-1.5 rounded-xl text-xs font-songwriter font-medium transition-all"
           style={{ background: 'rgba(255,255,255,0.5)', color: '#7c3aed' }}
         >
           ⬇️ Guardar
@@ -189,7 +189,7 @@ export default function DrawingCanvas() {
         onTouchMove={draw}
         onTouchEnd={endDraw}
       />
-      <p className="text-xs font-lato opacity-50 text-center" style={{ color: '#7c3aed' }}>
+      <p className="text-xs font-songwriter opacity-50 text-center" style={{ color: '#7c3aed' }}>
         Dibuja libremente — tus creaciones son tuyas 🎨
       </p>
     </div>

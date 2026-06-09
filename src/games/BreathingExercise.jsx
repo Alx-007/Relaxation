@@ -126,13 +126,13 @@ export default function BreathingExercise() {
       {/* Phase label */}
       <div className="text-center">
         <p
-          className="font-playfair text-2xl font-semibold italic mb-1"
+          className="font-muthiara text-2xl font-semibold italic mb-1"
           style={{ color: running ? currentPhase.color : '#c084fc' }}
         >
           {running ? currentPhase.label : 'Listo para respirar'}
         </p>
         {running && (
-          <p className="font-lato text-sm opacity-60" style={{ color: '#7c3aed' }}>
+          <p className="font-songwriter text-sm opacity-60" style={{ color: '#7c3aed' }}>
             {Math.ceil(currentPhase.duration / 1000 * (1 - progress))}s restantes
           </p>
         )}
@@ -155,7 +155,7 @@ export default function BreathingExercise() {
       {/* Controls */}
       <button
         onClick={toggleRunning}
-        className="px-6 py-3 rounded-2xl font-lato font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95 shadow-md"
+        className="px-6 py-3 rounded-2xl font-songwriter font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95 shadow-md"
         style={{
           background: running
             ? 'linear-gradient(135deg, #6b7280, #9ca3af)'
@@ -166,7 +166,7 @@ export default function BreathingExercise() {
         {running ? '⏸ Pausar' : '▶ Iniciar'}
       </button>
 
-      <p className="text-xs font-lato text-center max-w-xs opacity-60" style={{ color: '#7c3aed' }}>
+      <p className="text-xs font-songwriter text-center max-w-xs opacity-60" style={{ color: '#7c3aed' }}>
         Ciclo: Inhala 4s → Sostén 4s → Exhala 6s → Pausa 2s
       </p>
     </div>

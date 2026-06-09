@@ -39,7 +39,7 @@ function MessageBubble({ msg }) {
     <div className={`flex items-end gap-2 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
       {!isUser && <LunaAvatar />}
       <div
-        className={`max-w-[80%] px-4 py-3 rounded-2xl font-lato text-sm leading-relaxed ${
+        className={`max-w-[80%] px-4 py-3 rounded-2xl font-songwriter text-sm leading-relaxed ${
           isUser ? 'rounded-br-sm' : 'rounded-bl-sm'
         }`}
         style={
@@ -69,7 +69,7 @@ function TypingIndicator() {
     <div className="flex items-end gap-2">
       <LunaAvatar typing />
       <div
-        className="px-4 py-3 rounded-2xl rounded-bl-sm font-lato text-sm"
+        className="px-4 py-3 rounded-2xl rounded-bl-sm font-songwriter text-sm"
         style={{ background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(8px)', border: '1px solid rgba(168,85,247,0.2)', color: '#7c3aed' }}
       >
         <span>Luna está escribiendo</span>
@@ -147,10 +147,10 @@ export default function ChatSection() {
       <div className="max-w-2xl mx-auto w-full flex flex-col flex-1" style={{ height: 'calc(100vh - 5rem)' }}>
         {/* Header */}
         <div className="text-center py-4 animate-fade-in-up">
-          <h2 className="font-playfair text-3xl sm:text-4xl font-bold" style={{ color: '#3b0764' }}>
+          <h2 className="font-muthiara text-3xl sm:text-4xl font-bold" style={{ color: '#3b0764' }}>
             Repasar con Luna 🌙
           </h2>
-          <p className="font-lato text-sm opacity-65 mt-1" style={{ color: '#5b21b6' }}>
+          <p className="font-songwriter text-sm opacity-65 mt-1" style={{ color: '#5b21b6' }}>
             Tu tutora personal de IA — amable, paciente y siempre aquí
           </p>
         </div>
@@ -158,7 +158,7 @@ export default function ChatSection() {
         {/* No API key warning */}
         {!hasApiKey && (
           <div
-            className="glass rounded-2xl px-4 py-3 mb-3 text-sm font-lato text-center animate-fade-in-up"
+            className="glass rounded-2xl px-4 py-3 mb-3 text-sm font-songwriter text-center animate-fade-in-up"
             style={{ color: '#b91c1c', background: 'rgba(254,226,226,0.7)' }}
           >
             ⚠️ Falta la API key de Anthropic. Crea un archivo <code>.env</code> con{' '}
@@ -181,7 +181,7 @@ export default function ChatSection() {
               <div className="flex items-end gap-2">
                 <LunaAvatar />
                 <div
-                  className="max-w-[80%] px-4 py-3 rounded-2xl rounded-bl-sm font-lato text-sm leading-relaxed"
+                  className="max-w-[80%] px-4 py-3 rounded-2xl rounded-bl-sm font-songwriter text-sm leading-relaxed"
                   style={{
                     background: 'rgba(255,255,255,0.75)',
                     backdropFilter: 'blur(8px)',
@@ -196,7 +196,7 @@ export default function ChatSection() {
             )}
             {error && (
               <div
-                className="text-center text-xs font-lato px-3 py-2 rounded-xl"
+                className="text-center text-xs font-songwriter px-3 py-2 rounded-xl"
                 style={{ background: 'rgba(254,226,226,0.7)', color: '#b91c1c' }}
               >
                 {error}
@@ -212,7 +212,7 @@ export default function ChatSection() {
           >
             <button
               onClick={newSession}
-              className="px-3 py-2 rounded-xl text-xs font-lato font-medium transition-all hover:bg-purple-100 flex-shrink-0"
+              className="px-3 py-2 rounded-xl text-xs font-songwriter font-medium transition-all hover:bg-purple-100 flex-shrink-0"
               style={{ color: '#7c3aed', background: 'rgba(255,255,255,0.5)' }}
               title="Nueva sesión"
             >
@@ -226,7 +226,7 @@ export default function ChatSection() {
               placeholder="Escribe tu pregunta a Luna..."
               disabled={loading || !hasApiKey}
               rows={1}
-              className="flex-1 resize-none bg-white/60 rounded-2xl px-4 py-2.5 font-lato text-sm outline-none border transition-all"
+              className="flex-1 resize-none bg-white/60 rounded-2xl px-4 py-2.5 font-songwriter text-sm outline-none border transition-all"
               style={{
                 color: '#3b0764',
                 borderColor: 'rgba(168,85,247,0.3)',
@@ -252,7 +252,7 @@ export default function ChatSection() {
           </div>
         </div>
 
-        <p className="text-center text-xs font-lato opacity-40 pt-2" style={{ color: '#7c3aed' }}>
+        <p className="text-center text-xs font-songwriter opacity-40 pt-2" style={{ color: '#7c3aed' }}>
           Presiona Enter para enviar · Shift+Enter para nueva línea
         </p>
       </div>

@@ -182,7 +182,7 @@ export default function OrganizeGame() {
       {done ? (
         <div className="flex flex-col items-center gap-3 py-8">
           <span className="text-5xl">🎉</span>
-          <p className="font-playfair text-lg font-semibold" style={{ color: '#3b0764' }}>
+          <p className="font-muthiara text-lg font-semibold" style={{ color: '#3b0764' }}>
             ¡Todo en su lugar!
           </p>
           <p className="text-sm text-center" style={{ color: '#7c3aed' }}>
